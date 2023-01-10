@@ -22,17 +22,18 @@ typedef struct GRAPH_NODE_ {
     int index;
 } node, *pnode;
 
-void build_graph_cmd(pnode *head);
+void buildGraphCmd(pnode *head);
 
-void insert_node_cmd(pnode *head);
+void insertNodeCmd(pnode *head);
 
-void delete_node_cmd(pnode *head);
+void deleteNodeCmd(pnode *head);
 
-void printGraph_cmd(pnode head);  //for self debug
-void deleteGraph_cmd(pnode *head);
+void printGraphCmd(pnode head);
 
-void shortsPath_cmd(pnode head);
+void deleteGraphCmd(pnode *head);
 
-void TSP_cmd(pnode head);
+void shortsPathCmd(pnode head);
+
+void tspCmd(pnode head);
 
 #endif

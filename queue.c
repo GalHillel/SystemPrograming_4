@@ -1,6 +1,6 @@
 #include "queue.h"
 
-qnode *new_queue_node(pnode data, int p) {
+qnode *newQueueNode(pnode data, int p) {
     qnode *temp = (qnode *) malloc(sizeof(qnode));
     temp->nodedata = data;
     temp->priority = p;
@@ -10,16 +10,16 @@ qnode *new_queue_node(pnode data, int p) {
 
 pnode pop(qnode **head) {
     pnode temp = (*head)->nodedata;
-    qnode *temptofree = *head;
+    qnode *tempToFree = *head;
     (*head) = (*head)->next;
-    free(temptofree);
+    free(tempToFree);
     return temp;
 }
 
 void push(qnode **head, pnode d, int p) {
     qnode *start = (*head);
-    qnode *temp = new_queue_node(d, p);
-    if (is_empty(head)) {
+    qnode *temp = newQueueNode(d, p);
+    if (isEmpty(head)) {
         (*head) = temp;
         return;
     }
@@ -37,6 +37,6 @@ void push(qnode **head, pnode d, int p) {
     }
 }
 
-int is_empty(qnode **head) {
+int isEmpty(qnode **head) {
     return (*head) == NULL;
 }

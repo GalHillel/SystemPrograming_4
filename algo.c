@@ -1,13 +1,12 @@
 #include <limits.h>
 #include "algo.h"
-#include "edges.h"
 #include "graph.h"
 #include "nodes.h"
 #include "queue.h"
 
 void dijkstra(int *arr, pnode source) {
-    qnode *source_queue = new_queue_node(source, 0);
-    while (!is_empty(&source_queue)) {
+    qnode *source_queue = newQueueNode(source, 0);
+    while (!isEmpty(&source_queue)) {
         source = pop(&source_queue);
         pedge curr_edge = source->edges;
         while (curr_edge) {
@@ -27,15 +26,15 @@ void permutation(int *cities, int start, int end, int number_of_nodes, int *ans,
         for (int i = 0; i < number_of_nodes; i++) {
             dij[i] = INT_MAX;
         }
-        pnode source = find_node(cities[0], head);
+        pnode source = findNode(cities[0], head);
         dij[source->index] = 0;
         for (int i = 1; i <= end; i++) {
             dijkstra(dij, source);
-            if (dij[find_node(cities[i], head)->index] == INT_MAX) {
+            if (dij[findNode(cities[i], head)->index] == INT_MAX) {
                 free(dij);
                 return;
             }
-            source = find_node(cities[i], head);
+            source = findNode(cities[i], head);
             route_len = route_len + dij[source->index];
             for (int j = 0; j < number_of_nodes; j++) {
                 dij[j] = INT_MAX;
