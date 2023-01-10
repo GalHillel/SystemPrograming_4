@@ -1,6 +1,13 @@
+#include <float.h>
+#include <limits.h>
 #include <stdio.h>
+#include <stdlib.h>
+
+//#include "algo.c"
+//#include "edges.h"
 #include "graph.h"
 #include "nodes.h"
+//#include "queue.h"
 
 
 int main() {
@@ -10,30 +17,30 @@ int main() {
     while (scanf("%c", &s) != EOF) {
         switch (s) {
             case 'A':
-                deleteGraphCmd(&head);
+                deleteGraph_cmd(&head);
                 scanf("%d", &k);
                 head = generate(k);
                 break;
             case 'n':
-                buildGraphCmd(&head);
+                build_graph_cmd(&head);
                 break;
             case 'B':
-                insertNodeCmd(&head);
+                insert_node_cmd(&head);
                 break;
             case 'p':
-                printGraphCmd(head);
+                printGraph_cmd(head);
                 break;
             case 'S':
-                shortsPathCmd(head);
+                shortsPath_cmd(head);
                 break;
             case 'D':
-                deleteNodeCmd(&head);
+                delete_node_cmd(&head);
                 break;
             case 'T':
-                tspCmd(head);
+                TSP_cmd(head);
                 break;
         }
     }
-    deleteGraphCmd(&head);
+    deleteGraph_cmd(&head);
     return 0;
 }

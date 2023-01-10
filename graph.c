@@ -2,72 +2,73 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "algo.c"
+#include "edges.h"
 #include "graph.h"
 #include "nodes.h"
 #include "queue.h"
 
-void buildGraphCmd(pnode *head) {
+void build_graph_cmd(pnode *head) {
     int i;
     scanf("%d", &i);
-    pnode source = findNode(i, *head);
+    pnode source = find_node(i, *head);
     pedge prev = NULL;
     while (scanf("%d", &i) == 1) {
-        pnode dest = findNode(i, *head);
+        pnode dest = find_node(i, *head);
         scanf("%d", &i);
-        prev = newEdge(i, prev, dest);
+        prev = new_edge(i, prev, dest);
     }
     source->edges = prev;
 }
 
-void insertNodeCmd(pnode *head) {
+void insert_node_cmd(pnode *head) {
     int i;
     scanf("%d", &i);
-    pnode source = findNode(i, *head);
+    pnode source = find_node(i, *head);
     if (*head == NULL) {
-        *head = newNode(i, NULL);
+        *head = new_node(i, NULL);
         source = *head;
     } else if (source != NULL) {
-        removeOutEdges(source);
+        remove_out_edges(source);
     } else {
-        source = insertNode(i, head);
+        source = insert_node(i, head);
     }
     pedge prev = NULL;
     while (scanf("%d", &i) == 1) {
-        pnode dest = findNode(i, *head);
+        pnode dest = find_node(i, *head);
         scanf("%d", &i);
-        prev = newEdge(i, prev, dest);
+        prev = new_edge(i, prev, dest);
     }
     source->edges = prev;
 }
 
-void deleteNodeCmd(pnode *head) {
+void delete_node_cmd(pnode *head) {
     int i;
     scanf("%d", &i);
-    pnode checkNode = *head;
+    pnode check_node = *head;
     pnode delete = NULL;
-    if (checkNode->node_num == i) {
-        *head = (checkNode->next);
-        delete = checkNode;
+    if (check_node->node_num == i) {
+        *head = (check_node->next);
+        delete = check_node;
     } else {
-        while (checkNode->next) {
-            if (checkNode->next->node_num == i) {
-                delete = checkNode->next;
-                checkNode->next = delete->next;
+        while (check_node->next) {
+            if (check_node->next->node_num == i) {
+                delete = check_node->next;
+                check_node->next = delete->next;
                 break;
             }
-            checkNode = checkNode->next;
+            check_node = check_node->next;
         }
     }
-    checkNode = *head;
-    while (checkNode) {
-        removeSource(i, checkNode);
-        checkNode = checkNode->next;
+    check_node = *head;
+    while (check_node) {
+        remove_source(i, check_node);
+        check_node = check_node->next;
     }
-    removeOutEdges(delete);
+    remove_out_edges(delete);
     free(delete);
 }
 
-void printGraphCmd(pnode head) {  //for self debug
+void printGraph_cmd(pnode head) {  //for self debug
     while (head) {
         printf("node id: %d\n", head->node_num);
         pedge source = head->edges;
@@ -79,17 +80,17 @@ void printGraphCmd(pnode head) {  //for self debug
     }
 }
 
-void deleteGraphCmd(pnode *head) {
+void deleteGraph_cmd(pnode *head) {
     pnode source = *head;
     while (source) {
-        removeOutEdges(source);
+        remove_out_edges(source);
         pnode delete = source;
         source = source->next;
         free(delete);
     }
 }
 
-void shortsPathCmd(pnode head) {
+void shortsPath_cmd(pnode head) {
     int src;
     int dest;
     int got = 0;
@@ -127,7 +128,7 @@ void shortsPathCmd(pnode head) {
     free(arr);
 }
 
-void tspCmd(pnode head) {
+void TSP_cmd(pnode head) {
     int j;
     scanf("%d", &j);
     int *cities = (int *) malloc(sizeof(int) * j);

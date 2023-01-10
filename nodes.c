@@ -1,6 +1,6 @@
 #include "nodes.h"
 
-pnode newNode(int k, pnode next) {
+pnode new_node(int k, pnode next) {
     pnode p = (pnode) malloc(sizeof(node));
     p->node_num = k;
     p->next = next;
@@ -8,7 +8,7 @@ pnode newNode(int k, pnode next) {
     return p;
 }
 
-pnode findNode(int data, pnode head) {
+pnode find_node(int data, pnode head) {
     while (head) {
         if (head->node_num == data) {
             return head;
@@ -21,13 +21,13 @@ pnode findNode(int data, pnode head) {
 pnode generate(int k) {
     pnode head = NULL;
     for (int i = k - 1; i >= 0; i--) {
-        head = newNode(i, head);
+        head = new_node(i, head);
     }
     return head;
 }
 
-void removeOutEdges(pnode here) {
-    pedge next = here->edges;
+void remove_out_edges(pnode source) {
+    pedge next = source->edges;
     while (next) {
         pedge prev = next;
         next = next->next;
@@ -35,12 +35,12 @@ void removeOutEdges(pnode here) {
     }
 }
 
-void removeSource(int data, pnode here) {
-    pedge check_edge = here->edges;
+void remove_source(int data, pnode source) {
+    pedge check_edge = source->edges;
     if (check_edge) {
         if (check_edge->endpoint->node_num == data) {
             pedge delete = check_edge;
-            here->edges = check_edge->next;
+            source->edges = check_edge->next;
             free(delete);
             return;
         }
@@ -56,17 +56,17 @@ void removeSource(int data, pnode here) {
     }
 }
 
-pnode insertNode(int data, pnode *head) {
+pnode insert_node(int data, pnode *head) {
     pnode *p = head;
     while ((*p)->next) {
         if ((*p)->node_num < data && (*p)->next->node_num > data) {
-            pnode new = newNode(data, (*p)->next);
+            pnode new = new_node(data, (*p)->next);
             (*p)->next = new;
             return new;
         }
         p = &((*p)->next);
     }
-    pnode new = newNode(data, (*p)->next);
+    pnode new = new_node(data, (*p)->next);
     (*p)->next = new;
     return new;
 }
